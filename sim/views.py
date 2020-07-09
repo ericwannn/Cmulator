@@ -1,11 +1,24 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views import generic
 
 from .models import Question, Choice
+from .forms import SimulationConfigForm
 
-# Create your views here.
+
+def get_simulation_config(request):
+
+    if request.method == 'POST':
+        form = SimulationConfigForm(request.POST)
+        if form.is_valid():
+            print(form)
+            return HttpResponse("submit!")
+
+    else:
+        form = SimulationConfigForm()
+
+    return render(request, 'sim/submit_simulation_config.html', {'form': form})
 
 
 class IndexView(generic.ListView):

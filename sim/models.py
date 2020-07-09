@@ -2,7 +2,37 @@ import datetime
 from django.utils import timezone
 from django.db import models
 
-# Create your models here.
+
+class SimulationConfig(models.Model):
+
+    AUTHOR_CHOICES = [
+        ('eva_chen', 'Eva'),
+        ('conan_zhang', 'Conan'),
+        ('freya_meng', 'meng'),
+        ('eric_wan', 'Eric'),
+    ]
+    sim_name = models.CharField(max_length=30)
+    author = models.CharField(max_length=30, choices=AUTHOR_CHOICES)
+    date = models.DateTimeField()
+
+    class Meta:
+        ordering = ['date']
+        verbose_name = 'job'
+        verbose_name_plural = 'jobs'
+
+
+class SimulationResult(models.Model):
+    settings = models.ForeignKey(SimulationConfig, on_delete=models.CASCADE)
+    sharpe = models.FloatField()
+    vol = models.FloatField()
+    turnover = models.FloatField()
+    ret = models.FloatField()
+    date = models.DateTimeField()
+
+    class Meta:
+        ordering = ['date']
+        verbose_name = 'result'
+        verbose_name_plural = 'results'
 
 
 class Question(models.Model):

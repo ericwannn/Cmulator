@@ -1,9 +1,25 @@
-{% if latest_question_list %}
-    <ul>
-        {% for question in latest_question_list %}
-            <li><a href="{% url 'sim:detail' question.id %}">{{ question.question_text }}</a></li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+<!DOCTYPE html>
+<head>
+    <title>Simulation</title>
+    <meta charset="utf-8">
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% bootstrap_messages %}
+    <link href="https://v3.bootcss.com/examples/signin/signin.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    {% if latest_question_list %}
+        <ul>
+            {% for question in latest_question_list %}
+                <li><a href="{% url 'sim:detail' question.id %}">{{ question.question_text }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+
+
+</div>
+</body>
